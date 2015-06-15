@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+
+	<ui:composition template="/WEB-INF/tags/layout.xhtml">
+		<ui:define name="content">
+<h:form id="form1">
+<p:ajaxStatus id="startAjax">
+	                <f:facet name="start">
+	                    <h:outputText value="basladi" />  
+	                </f:facet>
+	                <f:facet name="complete">
+	                     <h:outputText value="" />  
+	                </f:facet>
+	            </p:ajaxStatus>
+
+<p:messages id="messages"  autoUpdate="true" closable="true" />
+<h:outputText id="txt_count" value="#{parserMB.message}" />
+<p:poll interval="60" update="txt_count" async="true" listener="#{parserMB.prepareMessage}" widgetVar="poll" autoStart="true"/>
+<p:contextMenu for="cars">
+<p:menuitem value="Test" update="cars" icon="ui-icon-close" async="true" actionListener="#{parserMB.test}"/>
+        <p:menuitem value="İlce insert" update="cars" icon="ui-icon-close" actionListener="#{parserMB.insertIlce}"/>
+        <p:menuitem value="Mahalle insert" update="cars" icon="ui-icon-close" actionListener="#{parserMB.insertMahalle}"/>
+        <p:menuitem value="Sokak insert" update="cars" icon="ui-icon-close" actionListener="#{parserMB.insertSokak}"/>
+        <p:menuitem value="Bina insert" update="cars" icon="ui-icon-close" actionListener="#{parserMB.insertBina}"/>
+        <p:menuitem value="Coordinate insert" update="cars" icon="ui-icon-close" async="true" actionListener="#{parserMB.insertCoordinate}"/>
+</p:contextMenu>
+
+		<p:dataTable id="cars" var="service" value="#{parserMB.serviceList}"
+			selection="#{parserMB.selectedService}" selectionMode="single" rowKey="#{service.ilceName}">
+		 <p:column headerText="ilce">
+        <h:outputText value="#{service.ilceName}" />
+    </p:column>
+    <p:column headerText="complatedMahalleCount">
+        <h:outputText value="#{service.complatedMahalleCount}" />
+    </p:column>
+ 
+    <p:column headerText="uncomplatedMahalleCount">
+        <h:outputText value="#{service.uncomplatedMahalleCount}" />
+    </p:column>
+ 
+    <p:column headerText="totalMahalleCount">
+        <h:outputText value="#{service.totalMahalleCount}" />
+    </p:column>
+ 
+    <p:column headerText="complatedSokakCount">
+        <h:outputText value="#{service.complatedSokakCount}" />
+    </p:column>
+    
+    
+    <p:column headerText="uncomplatedSokakCount">
+        <h:outputText value="#{service.uncomplatedSokakCount}" />
+    </p:column>
+    <p:column headerText="complatedBinaCount">
+        <h:outputText value="#{service.complatedBinaCount}" />
+    </p:column>
+    <p:column headerText="uncomplatedBinaCount">
+        <h:outputText value="#{service.uncomplatedBinaCount}" />
+    </p:column>
+    <p:column headerText="errorCount">
+        <h:outputText value="#{service.errorCount}" />
+    </p:column>
+    <p:column headerText="uncomplateCoordinateCount">
+        <h:outputText value="#{service.uncomplatedCoordinateCount}" />
+    </p:column>
+
+<f:facet name="footer">
+            <p:menuButton value="Options">
+            	<p:menuitem value="Test" update="cars" icon="ui-icon-close" async="true" actionListener="#{parserMB.test}"/>
+        <p:menuitem value="İlce insert" update="cars" icon="ui-icon-close" actionListener="#{parserMB.insertIlce}"/>
+        <p:menuitem value="Mahalle insert" update="cars" icon="ui-icon-close" actionListener="#{parserMB.insertMahalle}"/>
+        <p:menuitem value="Sokak insert" update="cars" icon="ui-icon-close" actionListener="#{parserMB.insertSokak}"/>
+        <p:menuitem value="Bina insert" update="cars" icon="ui-icon-close" actionListener="#{parserMB.insertBina}"/>
+        <p:menuitem value="Coordinate insert" update="cars" icon="ui-icon-close" async="true" actionListener="#{parserMB.insertCoordinate}"/>
+            </p:menuButton>
+           
+        </f:facet>
+</p:dataTable>
+			
+</h:form>
+		</ui:define>
+	</ui:composition>
+
+
+
+</h:body>
+</html>
